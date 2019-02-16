@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchRates } from '../actions';
 import '../App.scss';
 
-const base = "USD";
+const base = 'USD';
 
 const rates = {
   GBP: 0.77256,
@@ -20,26 +20,26 @@ class App extends Component {
     this.state = { amount: null };
   }
 
-  asyncFetch = async () => {
-    try {
-      const response = await fetch(URL);
-      if(response.ok){
-        return await response.json();
+    asyncFetch = async () => {
+      try {
+        const response = await fetch(URL);
+        if(response.ok){
+          return await response.json();
+        }
+      } catch(error) {
+        console.log(error);
       }
-    } catch(error) {
-      console.log(error);
-    }
-  };
+    };
 
   getRates = () => {
     this.asyncFetch().then(
-        res => console.log('successfully fetched', res),
-        err => console.log(err)
+      res => console.log('successfully fetched', res),
+      err => console.log(err)
     );
   };
 
   handleFetchRates = () => {
-      this.props.dispatch(fetchRates());
+    this.props.dispatch(fetchRates());
   };
 
   handleTextChange = e => {
@@ -54,8 +54,8 @@ class App extends Component {
             <div className="App-row">
               <div className="App-row__label">{base}</div>
               <div>-<input
-                  type="number"
-                  onChange={this.handleTextChange}
+                type="number"
+                onChange={this.handleTextChange}
               /></div>
             </div>
             <div className="App-row">
@@ -63,9 +63,9 @@ class App extends Component {
               <div>+{this.state.amount * rates.GBP}</div>
             </div>
             <div className="App-row">
-            <div className="App-row__label">EUR</div>
-            <div>+{this.state.amount * rates.EUR}</div>
-          </div>
+              <div className="App-row__label">EUR</div>
+              <div>+{this.state.amount * rates.EUR}</div>
+            </div>
             <div>amount to change {this.state.amount} {this.props.isLoading.toString()}</div>
 
             <button onClick={this.getRates}>Fetch</button>

@@ -14,19 +14,19 @@ import * as serviceWorker from './serviceWorker';
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
-    reducer,
-    composeWithDevTools(
-        applyMiddleware(sagaMiddleware),
-    )
+  reducer,
+  composeWithDevTools(
+    applyMiddleware(sagaMiddleware),
+  )
 );
 
 sagaMiddleware.run(saga);
 
 render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
