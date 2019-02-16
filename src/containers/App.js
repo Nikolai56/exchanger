@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchRates } from '../actions';
 import '../App.scss';
 
 const base = "USD";
@@ -37,6 +38,10 @@ class App extends Component {
     );
   };
 
+  handleFetchRates = () => {
+      this.props.dispatch(fetchRates());
+  };
+
   handleTextChange = e => {
     this.setState({ amount: e.target.value });
   };
@@ -49,7 +54,7 @@ class App extends Component {
             <div className="App-row">
               <div className="App-row__label">{base}</div>
               <div>-<input
-                  type="text"
+                  type="number"
                   onChange={this.handleTextChange}
               /></div>
             </div>
@@ -61,9 +66,10 @@ class App extends Component {
             <div className="App-row__label">EUR</div>
             <div>+{this.state.amount * rates.EUR}</div>
           </div>
-            <div>amount to change {this.state.amount} {this.props.isFetching.toString()}</div>
+            <div>amount to change {this.state.amount} {this.props.isLoading.toString()}</div>
 
             <button onClick={this.getRates}>Fetch</button>
+            <button onClick={this.handleFetchRates}>Fetch Saga</button>
           </div>
         </header>
       </div>
@@ -72,7 +78,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  isFetching: state.isFetching
+  isLoading: state.isLoading
 });
 
 export default connect(mapStateToProps)(App);
