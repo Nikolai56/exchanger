@@ -19,9 +19,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "lint": "yarn eslint . --fix",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "flow": "flow",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
@@ -35,6 +37,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "flow-bin": "^0.93.0",
     "gh-pages": "^2.0.1",
     "node-sass": "^4.11.0",
     "redux-devtools-extension": "^2.13.8"

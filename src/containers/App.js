@@ -1,24 +1,38 @@
+// @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchRates } from '../actions';
 import '../App.scss';
 
-const base = 'USD';
+type Props = {
+  data: Object,
+  dispatch: (action: () => any) => void,
+  isLoading: boolean,
+};
 
-const rates = {
-  GBP: 0.77256,
-  EUR: 0.882807
+type State = {
+  amount: number,
 };
 
 const APP_ID = '314315a90b8243d5bb2c1060cd7c738b';
 //could be BASE const &base=${BASE}
 const URL = `https://openexchangerates.org/api/latest.json?app_id=${APP_ID}`;
 
-class App extends Component {
+class App extends Component<Props, State> {
   constructor(props) {
     super(props);
-    this.state = { amount: null };
+    this.state = { amount: 0 };
   }
+
+  static defaultProps = {
+    data: {
+      base: 'USD',
+      rates: {
+        GBP: 0.77256,
+        EUR: 0.882807,
+      }
+    }
+  };
 
     asyncFetch = async () => {
       try {
@@ -47,6 +61,9 @@ class App extends Component {
   };
 
   render() {
+    const { data: { rates, base } } = this.props;
+    console.log('props data', rates);
+
     return (
       <div className="App">
         <header className="App-header">
@@ -55,6 +72,7 @@ class App extends Component {
               <div className="App-row__label">{base}</div>
               <div>-<input
                 type="number"
+                className="input"
                 onChange={this.handleTextChange}
               /></div>
             </div>
@@ -66,8 +84,6 @@ class App extends Component {
               <div className="App-row__label">EUR</div>
               <div>+{this.state.amount * rates.EUR}</div>
             </div>
-            <div>amount to change {this.state.amount} {this.props.isLoading.toString()}</div>
-
             <button onClick={this.getRates}>Fetch</button>
             <button onClick={this.handleFetchRates}>Fetch Saga</button>
           </div>
@@ -77,8 +93,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  isLoading: state.isLoading
+const mapStateToProps = state => ({
+  isLoading: state.isLoading,
+  data: state.data,
 });
 
 export default connect(mapStateToProps)(App);
