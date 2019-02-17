@@ -16,8 +16,7 @@ function* fetchRates() {
     const data = yield call(() => {
       return fetch(URL)
         .then(res => res.json());
-    }
-    );
+    });
     yield put(requestRatesSuccess(data));
   } catch (error) {
     yield put(requestRatesError(error.message));

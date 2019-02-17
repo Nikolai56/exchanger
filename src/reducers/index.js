@@ -3,7 +3,7 @@ import { ActionTypes } from '../actions';
 const initialState = {
   data: undefined,
   isLoading: false,
-  error: false,
+  error: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -12,19 +12,19 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       isLoading: true,
-      error: false,
+      error: null,
     };
   case ActionTypes.REQUESTED_RATES_SUCCEEDED:
     return {
+      ...state,
       data: action.data,
       isLoading: false,
-      error: false,
     };
   case ActionTypes.REQUESTED_RATES_FAILED:
     return {
       ...state,
       isLoading: false,
-      error: true,
+      error: action.error,
     };
   default:
     return state;

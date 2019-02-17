@@ -8,6 +8,7 @@ type Props = {
   data: Object,
   dispatch: (action: () => any) => void,
   isLoading: boolean,
+  error: 'string',
 };
 
 type State = {
@@ -51,8 +52,28 @@ class App extends Component<Props, State> {
   };
 
   render() {
-    const { data: { rates, base }, isLoading } = this.props;
-    console.log('props data', this.props.data);
+    const { data: { rates, base, error, message, description }, isLoading } = this.props;
+    console.log('App render props', this.props);
+
+    if (error) return (
+      <div className="App">
+        <header className="App-header">
+          <div className="phoneContainer">
+            <div>{message} - {description}</div>
+          </div>
+        </header>
+      </div>
+    );
+
+    if (this.props.error) return (
+      <div className="App">
+        <header className="App-header">
+          <div className="phoneContainer">
+            <div>{this.props.error}</div>
+          </div>
+        </header>
+      </div>
+    );
 
     return (
       <div className="App">
@@ -87,6 +108,7 @@ class App extends Component<Props, State> {
 const mapStateToProps = state => ({
   isLoading: state.isLoading,
   data: state.data,
+  error: state.error,
 });
 
 export default connect(mapStateToProps)(App);
