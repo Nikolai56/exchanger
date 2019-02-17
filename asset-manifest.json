@@ -1,13 +1,13 @@
 {
   "main.css": "/exchanger/static/css/main.8357665f.chunk.css",
-  "main.js": "/exchanger/static/js/main.c2c9648e.chunk.js",
-  "main.js.map": "/exchanger/static/js/main.c2c9648e.chunk.js.map",
-  "static/js/1.f6e712b3.chunk.js": "/exchanger/static/js/1.f6e712b3.chunk.js",
-  "static/js/1.f6e712b3.chunk.js.map": "/exchanger/static/js/1.f6e712b3.chunk.js.map",
+  "main.js": "/exchanger/static/js/main.58e89f4b.chunk.js",
+  "main.js.map": "/exchanger/static/js/main.58e89f4b.chunk.js.map",
+  "static/js/1.5b196a22.chunk.js": "/exchanger/static/js/1.5b196a22.chunk.js",
+  "static/js/1.5b196a22.chunk.js.map": "/exchanger/static/js/1.5b196a22.chunk.js.map",
   "runtime~main.js": "/exchanger/static/js/runtime~main.1583b48c.js",
   "runtime~main.js.map": "/exchanger/static/js/runtime~main.1583b48c.js.map",
   "static/css/main.8357665f.chunk.css.map": "/exchanger/static/css/main.8357665f.chunk.css.map",
   "index.html": "/exchanger/index.html",
-  "precache-manifest.5e7bd67bf82eac949e5efb9035855273.js": "/exchanger/precache-manifest.5e7bd67bf82eac949e5efb9035855273.js",
+  "precache-manifest.3e6a765278ddcf5db5c29febfdd86eb6.js": "/exchanger/precache-manifest.3e6a765278ddcf5db5c29febfdd86eb6.js",
   "service-worker.js": "/exchanger/service-worker.js"
 }
