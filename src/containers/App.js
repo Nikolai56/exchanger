@@ -14,14 +14,10 @@ type State = {
   amount: number,
 };
 
-const APP_ID = '314315a90b8243d5bb2c1060cd7c738b';
-//could be BASE const &base=${BASE}
-const URL = `https://openexchangerates.org/api/latest.json?app_id=${APP_ID}`;
-
 class App extends Component<Props, State> {
   constructor(props) {
     super(props);
-    this.state = { amount: 0 };
+    this.state = { amount: 100 };
   }
 
   static defaultProps = {
@@ -34,23 +30,17 @@ class App extends Component<Props, State> {
     }
   };
 
-    asyncFetch = async () => {
-      try {
-        const response = await fetch(URL);
-        if(response.ok){
-          return await response.json();
-        }
-      } catch(error) {
-        console.log(error);
-      }
-    };
+  componentDidMount() {
+    // this.handleFetchRates();
+    this.timeInterval = setInterval(() => {
+      console.log('time to Refetch rates');
+      // this.handleFetchRates();
+    }, 10000);
+  }
 
-  getRates = () => {
-    this.asyncFetch().then(
-      res => console.log('successfully fetched', res),
-      err => console.log(err)
-    );
-  };
+  componentWillUnmount() {
+    clearInterval(this.timeInterval);
+  }
 
   handleFetchRates = () => {
     this.props.dispatch(fetchRates());
@@ -61,8 +51,8 @@ class App extends Component<Props, State> {
   };
 
   render() {
-    const { data: { rates, base } } = this.props;
-    console.log('props data', rates);
+    const { data: { rates, base }, isLoading } = this.props;
+    console.log('props data', this.props.data);
 
     return (
       <div className="App">
@@ -74,6 +64,7 @@ class App extends Component<Props, State> {
                 type="number"
                 className="input"
                 onChange={this.handleTextChange}
+                value={this.state.amount}
               /></div>
             </div>
             <div className="App-row">
@@ -84,8 +75,8 @@ class App extends Component<Props, State> {
               <div className="App-row__label">EUR</div>
               <div>+{this.state.amount * rates.EUR}</div>
             </div>
-            <button onClick={this.getRates}>Fetch</button>
             <button onClick={this.handleFetchRates}>Fetch Saga</button>
+            {isLoading && <div>Loading...</div>}
           </div>
         </header>
       </div>
